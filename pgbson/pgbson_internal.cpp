@@ -87,12 +87,12 @@ void composite_to_bson(mongo::BSONObjBuilder& builder, Datum composite)
     {
         bool isnull;
 
-        if (tupdesc->attrs[i]->attisdropped)
+        if (tupdesc->attrs[i].attisdropped)
             continue;
 
-        const char* field_name = NameStr(tupdesc->attrs[i]->attname);
+        const char* field_name = NameStr(tupdesc->attrs[i].attname);
         Datum val = heap_getattr(tuple, i + 1, tupdesc, &isnull);
-        datum_to_bson(field_name, builder, val, isnull, tupdesc->attrs[i]->atttypid);
+        datum_to_bson(field_name, builder, val, isnull, tupdesc->attrs[i].atttypid);
 
     }
 
